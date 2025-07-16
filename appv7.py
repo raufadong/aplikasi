@@ -65,6 +65,8 @@ if uploaded_file is not None:
 
             st.subheader("📌 Statistik Deskriptif")
             st.dataframe(df.describe(include='all').fillna('-'))
+            for col in df.select_dtypes(include='object').columns:
+            df[col] = df[col].astype(str)
 
         with tab2:
             st.subheader("⚙️ Pelatihan Model")
