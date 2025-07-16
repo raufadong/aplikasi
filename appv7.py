@@ -57,6 +57,8 @@ if uploaded_file is not None:
         tab1, tab2, tab3 = st.tabs(["📊 Dataset", "⚙️ Pelatihan Model", "🔍 Prediksi Manual"])
 
         with tab1:
+            for col in df.select_dtypes(include='object').columns:
+                df[col] = df[col].astype(str)
             st.subheader("📋 Pratinjau Dataset")
             st.dataframe(df.head())
             st.markdown("**Jumlah Baris:** {} | **Jumlah Kolom:** {}".format(df.shape[0], df.shape[1]))
@@ -65,8 +67,6 @@ if uploaded_file is not None:
 
             st.subheader("📌 Statistik Deskriptif")
             st.dataframe(df.describe(include='all').fillna('-'))
-            for col in df.select_dtypes(include='object').columns:
-            df[col] = df[col].astype(str)
 
         with tab2:
             st.subheader("⚙️ Pelatihan Model")
